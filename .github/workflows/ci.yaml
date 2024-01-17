@@ -5,11 +5,14 @@ jobs:
   my-first-job:
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v4
       - name: hello from GitHub Actions
         run: |
           echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
           echo "🐧 This job is now running on a ${{ runner.os }} server hosted by GitHub!"
           echo "🔎 The name of your branch is ${{ github.ref }} and your repository is ${{ github.repository }}."
           echo "🍏 This job's status is ${{ job.status }}."
-      - name: this step will fail
-        run: exit 1
+      - name: run python script
+        run: |
+          pip install -r requirements.txt
+          python ci.py
