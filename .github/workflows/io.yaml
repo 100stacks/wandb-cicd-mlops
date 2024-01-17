@@ -1,0 +1,16 @@
+name: Emit output vars between jobs
+on: [push]
+
+jobs:
+  io:
+    runs-on: ubuntu-latest
+    steps:
+      - name: set-var step
+        id: set-var
+        shell: python
+        run: |
+          import os
+          with open(os.environ['GITHUB_OUTPUT'], 'a') as f: # instead of this syntax: run: echo "test=hello" >> "$GITHUB_OUTPUT"
+            print(f'VAL=true', file=f)                # https://docs.github.com/en/actions/using-jobs/defining-outputs-for-jobs#example-defining-outputs-for-a-job
+      - name: print previous step VAL variable 
+        run: echo "the value is ${{ steps.set-var.outputs.VAL }}"
