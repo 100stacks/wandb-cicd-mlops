@@ -23,7 +23,7 @@ jobs:
       - name: print who pushed this commit
         run: |
           echo "$PUSHER pushed this"
-          echo "Their email is $EMAIL"
+          echo "Their email is ${EMAIL}"
         env:
           PUSHER: ${{ github.event.pusher.name }}
           EMAIL: ${{ github.event.pusher.email }}
