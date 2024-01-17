@@ -1,4 +1,4 @@
-name: GitHub Actions - Context and Environment Variables
+name: Context and Environment Variables
 run-name: ${{ github.actor }} is testing out GitHub Actions 🚀
 on: [push]
 jobs:
@@ -16,3 +16,7 @@ jobs:
         run: |
           ls ${{ github.workspace }}
       - run: echo "🍏 This job's status is ${{ job.status }}."
+      - name: see paylod # for debugging purposes
+        run: echo "PAYLOAD:${PAYLOAD}"
+        env:
+          PAYLOAD: ${{ toJSON(github.event) }}
